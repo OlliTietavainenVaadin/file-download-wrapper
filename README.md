@@ -1,6 +1,4 @@
-# Game Card
-
-Vaadin 10 Java integration of https://github.com/vpusher/game-card
+# File download wrapper add-on
 
 ## Development instructions
 
