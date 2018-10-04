@@ -1,5 +1,6 @@
 package org.vaadin.olli;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -36,6 +37,11 @@ public class FileDownloadWrapper extends PolymerTemplate<FileDownloadWrapper.Fil
         setFile(file);
     }
 
+    public FileDownloadWrapper(String fileName, DownloadBytesProvider provider) {
+        this(fileName);
+        setBytesProvider(fileName, provider);
+    }
+
     public FileDownloadWrapper(StreamResource streamResource) {
         this();
         setResource(streamResource);
@@ -47,6 +53,10 @@ public class FileDownloadWrapper extends PolymerTemplate<FileDownloadWrapper.Fil
 
     public void setResource(StreamResource streamResource) {
         anchor.setHref(streamResource);
+    }
+
+    public void setBytesProvider(String fileName, DownloadBytesProvider provider) {
+        setResource(new StreamResource(fileName, () -> new ByteArrayInputStream(provider.getBytes())));
     }
 
     public void setText(String text) {
@@ -70,6 +80,12 @@ public class FileDownloadWrapper extends PolymerTemplate<FileDownloadWrapper.Fil
 
     public void setFile(File file) {
         anchor.setHref(new StreamResource(getModel().getFileName(), () -> createResource(file)));
+    }
+
+    @FunctionalInterface
+    interface DownloadBytesProvider {
+
+        byte[] getBytes();
     }
 
     public interface FileDownloadWrapperModel extends TemplateModel {
