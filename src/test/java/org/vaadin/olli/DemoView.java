@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 
@@ -18,7 +19,11 @@ public class DemoView extends Div {
         buttonWrapper.wrapComponent(button);
         FileDownloadWrapper link = new FileDownloadWrapper(new StreamResource("bar.txt", () -> new ByteArrayInputStream("bar".getBytes())));
         link.setText("Look at me, I'm an <a> element");
-        vl.add(buttonWrapper, link);
+        TextField textField = new TextField("Enter file contents");
+        FileDownloadWrapper link2 = new FileDownloadWrapper("textfield.txt", () -> textField.getValue().getBytes());
+        link2.setText("Download textfield.txt that has contents of the above TextField");
+        vl.add(buttonWrapper, link, textField, link2);
         add(vl);
     }
+
 }
