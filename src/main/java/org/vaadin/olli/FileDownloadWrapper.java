@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.polymertemplate.Id;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
@@ -16,7 +16,7 @@ import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.templatemodel.TemplateModel;
 
 @Tag("file-download-wrapper")
-@HtmlImport("file-download-wrapper.html")
+@JsModule("./file-download-wrapper.js")
 public class FileDownloadWrapper extends PolymerTemplate<FileDownloadWrapper.FileDownloadWrapperModel> {
 
     @Id("download-link")
