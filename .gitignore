@@ -1,6 +1,7 @@
-/target/
+target/
 .idea/
-
+webpack.generated.js
+node_modules/
 .classpath
 .metadata/
 .project
