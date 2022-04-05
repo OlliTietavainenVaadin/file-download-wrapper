@@ -8,6 +8,10 @@ class FileDownloadWrapper extends PolymerElement {
 `;
   }
 
+  _attachDom(dom) {
+      this.appendChild(dom);
+  }
+
   static get is() {
       return 'file-download-wrapper';
   }
