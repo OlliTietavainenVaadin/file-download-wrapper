@@ -6,13 +6,12 @@
 
     <groupId>org.vaadin.olli</groupId>
     <artifactId>file-download-wrapper</artifactId>
-    <version>2.0.0</version>
+    <version>4.0.0</version>
     <name>File Download Wrapper</name>
     <description>Helper for creating links that allow you to download files.</description>
 
     <properties>
-        <vaadin.version>14.6.8</vaadin.version>
-
+        <vaadin.version>14.8.1</vaadin.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -170,6 +169,17 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <!-- Generated file that shouldn't be included in add-ons -->
+                    <excludes>
+                        <exclude>META-INF/VAADIN/config/flow-build-info.json</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -213,20 +223,13 @@
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.10.4</version>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <version>3.1.2</version>
                         <configuration>
-                            <quiet>true</quiet>
-                            <additionalparam>-Xdoclint:none</additionalparam>
+                            <!-- Generated file that shouldn't be included in add-ons -->
+                            <excludes>
+                                <exclude>META-INF/VAADIN/config/flow-build-info.json</exclude>
+                            </excludes>
                         </configuration>
                     </plugin>
                 </plugins>

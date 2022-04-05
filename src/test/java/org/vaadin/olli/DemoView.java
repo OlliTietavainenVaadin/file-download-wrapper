@@ -23,6 +23,18 @@ public class DemoView extends Div {
         FileDownloadWrapper link2 = new FileDownloadWrapper("textfield.txt", () -> textField.getValue().getBytes());
         link2.setText("Download textfield.txt that has contents of the above TextField");
         vl.add(buttonWrapper, link, textField, link2);
+
+
+        Button b3 = new Button("change sr", e -> {
+            StreamResource streamResource = new StreamResource("report.txt",  () -> new ByteArrayInputStream("bar".getBytes()));
+            buttonWrapper.setResource(streamResource);
+        });
+        vl.add(b3);
+
+        buttonWrapper.wrapComponent(button);
+        buttonWrapper.setFileName("test.xlsx");
+
+
         add(vl);
     }
 
