@@ -94,8 +94,8 @@ public class FileDownloadWrapper extends LitTemplate implements HasSize {
         void setFileName(String fileName);
     }
 
-	private Model getModel() {
-		return new Model() {
+	private FileDownloadWrapperModel getModel() {
+		return new FileDownloadWrapperModel() {
 			@Override
 			public void setFileName(String fileName) {
 				getElement().setProperty("fileName", fileName);
