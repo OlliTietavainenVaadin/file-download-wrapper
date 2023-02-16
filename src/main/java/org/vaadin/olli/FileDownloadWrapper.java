@@ -11,14 +11,13 @@ import com.vaadin.flow.component.HasSize;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Anchor;
-import com.vaadin.flow.component.polymertemplate.Id;
-import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.server.StreamResource;
-import com.vaadin.flow.templatemodel.TemplateModel;
+import com.vaadin.flow.component.littemplate.LitTemplate;
+import com.vaadin.flow.component.template.Id;
 
 @Tag("file-download-wrapper")
 @JsModule("./file-download-wrapper.js")
-public class FileDownloadWrapper extends PolymerTemplate<FileDownloadWrapper.FileDownloadWrapperModel> implements HasSize {
+public class FileDownloadWrapper extends LitTemplate implements HasSize {
 
     @Id("download-link")
     protected Anchor anchor;
@@ -89,9 +88,23 @@ public class FileDownloadWrapper extends PolymerTemplate<FileDownloadWrapper.Fil
         byte[] getBytes();
     }
 
-    public interface FileDownloadWrapperModel extends TemplateModel {
+    public interface FileDownloadWrapperModel {
         String getFileName();
 
         void setFileName(String fileName);
     }
+
+	private FileDownloadWrapperModel getModel() {
+		return new FileDownloadWrapperModel() {
+			@Override
+			public void setFileName(String fileName) {
+				getElement().setProperty("fileName", fileName);
+			}
+
+			@Override
+			public String getFileName() {
+				return getElement().getProperty("fileName", null);
+			}
+		};
+	}
 }

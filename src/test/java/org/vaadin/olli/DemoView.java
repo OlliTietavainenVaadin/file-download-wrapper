@@ -32,7 +32,7 @@ public class DemoView extends Div {
         vl.add(b3);
 
         buttonWrapper.wrapComponent(button);
-        buttonWrapper.setFileName("test.xlsx");
+        buttonWrapper.setFileName("test.txt");
 
 
         add(vl);
