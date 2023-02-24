@@ -6,7 +6,7 @@ node_modules/
 .metadata/
 .project
 .settings/
-node_modules
-
+frontend/generated/
+src/main/dev-bundle
 *.iml
 .DS_Store
