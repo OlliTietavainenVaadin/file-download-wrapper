@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasEnabled;
 import com.vaadin.flow.component.HasSize;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
@@ -17,7 +18,7 @@ import com.vaadin.flow.component.template.Id;
 
 @Tag("file-download-wrapper")
 @JsModule("./file-download-wrapper.js")
-public class FileDownloadWrapper extends LitTemplate implements HasSize {
+public class FileDownloadWrapper extends LitTemplate implements HasSize, HasEnabled {
 
     @Id("download-link")
     protected Anchor anchor;
