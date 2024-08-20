@@ -23,6 +23,12 @@ public class DemoView extends Div {
         FileDownloadWrapper link2 = new FileDownloadWrapper("textfield.txt", () -> textField.getValue().getBytes());
         link2.setText("Download textfield.txt that has contents of the above TextField");
         vl.add(buttonWrapper, link, textField, link2);
+        FileDownloadWrapper disabled = new FileDownloadWrapper(new StreamResource("baz.txt", () -> new ByteArrayInputStream("baz".getBytes())));
+        disabled.setText("I am disabled");
+        disabled.setEnabled(false);
+        Button reEnable = new Button("Re-enable link", e -> disabled.setEnabled(true));
+        Button reDisable = new Button("Disable link", e -> disabled.setEnabled(false));
+        vl.add(disabled, reEnable, reDisable);
 
 
         Button b3 = new Button("change sr", e -> {

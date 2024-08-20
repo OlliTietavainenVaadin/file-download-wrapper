@@ -57,9 +57,12 @@
       const item = {
         component: child,
         checked: child._checked,
+        keepOpen: child._keepOpen,
+        className: child.className,
         theme: child.__theme
       };
-      if (child.localName == 'vaadin-context-menu-item' && child._containerNodeId) {
+      // Do not hardcode tag name to allow `vaadin-menu-bar-item`
+      if (child._hasVaadinItemMixin && child._containerNodeId) {
         item.children = generateItemsTree(appId, child._containerNodeId);
       }
       child._item = item;
@@ -79,6 +82,24 @@
   function setChecked(component, checked) {
     if (component._item) {
       component._item.checked = checked;
+
+      // Set the attribute in the connector to show the checkmark
+      // without having to re-render the whole menu while opened.
+      if (component._item.keepOpen) {
+        component.toggleAttribute('menu-item-checked', checked);
+      }
+    }
+  }
+
+  /**
+   * Sets the keep open state for a context menu item.
+   *
+   * @param {HTMLElement} component
+   * @param {boolean} keepOpen
+   */
+  function setKeepOpen(component, keepOpen) {
+    if (component._item) {
+      component._item.keepOpen = keepOpen;
     }
   }
 
@@ -108,6 +129,10 @@
 
     setChecked(...args) {
       return tryCatchWrapper(setChecked)(...args);
+    },
+
+    setKeepOpen(...args) {
+      return tryCatchWrapper(setKeepOpen)(...args);
     },
 
     setTheme(...args) {

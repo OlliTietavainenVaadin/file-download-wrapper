@@ -1,11 +1,10 @@
 export interface FlowConfig {
-    imports?: () => void;
+    imports?: () => Promise<any>;
 }
 interface AppConfig {
     productionMode: boolean;
     appId: string;
     uidl: any;
-    clientRouting: boolean;
 }
 interface AppInitResponse {
     appConfig: AppConfig;
@@ -18,6 +17,7 @@ interface HTMLRouterContainer extends HTMLElement {
     onBeforeEnter?: (ctx: NavigationParameters, cmd: PreventAndRedirectCommands, router: Router) => void | Promise<any>;
     onBeforeLeave?: (ctx: NavigationParameters, cmd: PreventCommands, router: Router) => void | Promise<any>;
     serverConnected?: (cancel: boolean, url?: NavigationParameters) => void;
+    serverPaused?: () => void;
 }
 interface FlowRoute {
     action: (params: NavigationParameters) => Promise<HTMLRouterContainer>;
@@ -29,6 +29,7 @@ export interface NavigationParameters {
 }
 export interface PreventCommands {
     prevent: () => any;
+    continue?: () => any;
 }
 export interface PreventAndRedirectCommands extends PreventCommands {
     redirect: (route: string) => any;
@@ -44,6 +45,7 @@ export declare class Flow {
     private isActive;
     private baseRegex;
     private appShellTitle;
+    private navigation;
     constructor(config?: FlowConfig);
     /**
      * Return a `route` object for vaadin-router in an one-element array.
